@@ -10,12 +10,16 @@ Original file is located at
 import streamlit as st
 import pandas as pd
 import pickle
+import os
 
 st.title("Customer Churn Prediction App")
 st.write("Upload a CSV file with customer details to get churn predictions.")
 
 # Load model
-pipeline = pickle.load(open("churn_model.pkl", "rb"))
+model_path = "churn_model.pkl"
+
+with open(model_path, "rb") as f:
+    pipeline = pickle.load(f)
 preprocessor = pipeline["preprocessor"]
 model = pipeline["model"]
 
